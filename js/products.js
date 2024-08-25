@@ -1,10 +1,10 @@
 let PRODUCT_AUTO_URL =
-  "https://japceibal.github.io/emercado-api/cats_products/101.json";
+"https://japceibal.github.io/emercado-api/cats_products/101.json";
 let listaDeProductos = document.getElementById("PRODUCTOS");
 let nombreCategoria = document.getElementById("NOMBRE_CAT");
 
 function Mostrar_Productos(products) {
-  PRODUCTOS.innerHTML = "";
+PRODUCTOS.innerHTML = "";
   products.forEach((product) => {
     PRODUCTOS.innerHTML += `
             <div class="col-md-4 cursor-active">
