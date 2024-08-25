@@ -44,3 +44,9 @@ document.getElementById('logout').addEventListener('click', function () {
   window.location.href = 'login.html';
 ;
 })
+
+window.onload = function () {
+  if (localStorage.getItem('isLoggedIn') !== 'true') {
+        window.location.href = 'login.html'; 
+  }
+  };
