@@ -39,3 +39,8 @@ let getJSONData = function(url){
         return result;
     });
 }
+document.getElementById('logout').addEventListener('click', function () {
+  localStorage.removeItem('isLoggedIn')
+  window.location.href = 'login.html';
+;
+})
