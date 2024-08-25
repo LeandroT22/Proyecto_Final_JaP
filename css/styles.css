@@ -208,3 +208,17 @@ a.custom-card:hover {
 #n{
   font-weight: bolder;
 }
+body {
+  background-color: rgb(248, 249, 250);
+}
+.login-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.form-group {
+  margin-bottom: 1rem;
+}
