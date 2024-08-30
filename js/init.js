@@ -49,3 +49,8 @@ window.onload = function () {
             window.location.href = 'login.html';
         ;
     })
+
+    document.addEventListener("DOMContentLoaded", function () {
+      let nombre = localStorage.getItem("user");
+      if (nombre) document.getElementById("nombreUsuario").innerText = nombre;
+    });

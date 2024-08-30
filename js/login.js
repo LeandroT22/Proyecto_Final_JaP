@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (username && password) {
             // Guardar la sesión del usuario (esto puede ser una bandera simple en el localStorage)
             localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("user", username);
             window.location.href = "index.html"; // Redirigir al inicio
         } else {
             alert("Por favor, complete ambos campos.");
