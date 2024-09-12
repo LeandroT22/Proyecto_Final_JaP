@@ -1,5 +1,6 @@
-let PRODUCT_AUTO_URL =
-"https://japceibal.github.io/emercado-api/cats_products/101.json";
+ let categoria=localStorage.getItem("catID");
+ let PRODUCT_URL =
+"https://japceibal.github.io/emercado-api/cats_products/"+categoria+".json";
 let listaDeProductos = document.getElementById("PRODUCTOS");
 let nombreCategoria = document.getElementById("NOMBRE_CAT");
 
@@ -24,7 +25,7 @@ PRODUCTOS.innerHTML = "";
   });
 }
 
-getJSONData(PRODUCT_AUTO_URL).then((result) => {
+getJSONData(PRODUCT_URL).then((result) => {
   if (result.status === "ok") {
     let sortedProducts = result.data.products.sort((a, b) => a.cost - b.cost); //Ordena los productos por su costo de menor a mayor//
     Mostrar_Productos(result.data.products);
