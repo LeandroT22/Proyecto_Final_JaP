@@ -108,3 +108,19 @@ document.getElementById("clearRangeFilter").addEventListener("click", function()
   Mostrar_Productos(currentProductsArray);
 });
 });
+// Campo de texto buscador
+
+ // Función para filtrar productos
+ function filtrarProductosBuscador() {
+  let Buscador = searchInput.value.toLowerCase(); // Texto ingresado
+  return currentProductsArray.filter(product =>
+    product.name.toLowerCase().includes(Buscador) || // Verifica si el nombre coincide con el texto ingresado
+    product.description.toLowerCase().includes(Buscador) // Verifica si la descripción coincide con el texto ingresado
+  );
+}
+
+// Cuando el usuario escribe en el campo de búsqueda se genera el evento
+searchInput.addEventListener('input', function () {
+  let productosFiltrados = filtrarProductosBuscador(); // Filtrado de productos
+  Mostrar_Productos(productosFiltrados); // Muestra los productos
+});
