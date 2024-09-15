@@ -10,22 +10,22 @@ PRODUCTO.innerHTML = `
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="${product.images[0]}" class="img-fluid" alt="${product.name}">
+                        <img src="${product.images[0]}" class="img-fluid" style="margin-left: 130px; margin-bottom: 10px" alt="${product.name}">
                     </div>
-                    <div class="col-md-6 product-info" style="text-align:center; padding-top: 100px;">
+                    <div class="col-md-6 product-info" style="text-align:center; padding-top: 100px; font-size: 25px;">
                         <h5 id="n">${product.name}</h5>
                         <p>Vendidos: ${product.soldCount}</p>
                         <p id="p">Precio: ${product.currency} ${product.cost}</p>
+                        <h4 style="margin-top:80px;">Descripción del artículo:</h4>
+                        <p style="margin-left:130px; width:70%; font-style:italic; font-size:20px; color: dimgray; ">${product.description}</p>
                     </div>
                 </div>
 
-                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3" style=" margin-left: 125px;">
                 <img src="${product.images[1]}" class="col-md-2" alt="${product.name}">
                 <img src="${product.images[2]}" class="col-md-2" alt="${product.name}">
                 <img src="${product.images[3]}" class="col-md-2" alt="${product.name}">
                 </div>
-                <br>
-                <p class="col-md-12" style="width: 100%; text-align:center;">Descripción del artículo: ${product.description}</p>
             </div>
         </div>
     `;
