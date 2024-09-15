@@ -230,4 +230,19 @@ color: dimgray;
 a{ color: dimgray;
 }
 }
+  
+  .small-imageM:hover{
+    border-style: solid;
+    border-color: dimgray;
+    cursor: pointer;
+  }
+  
+  #contenedorInfo{
+    border-style: solid;
+    border-color: lightgray;
+    border-radius : 25px;
+    border-width: 1px;
+  }
+  
+  
 
