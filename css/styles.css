@@ -223,3 +223,11 @@ body {
 .form-group {
   margin-bottom: 1rem;
 }
+
+#NOMBRE_CAT_PROD {
+margin: 20px;
+color: dimgray;
+a{ color: dimgray;
+}
+}
+
