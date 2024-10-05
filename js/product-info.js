@@ -37,6 +37,8 @@ function Mostrar_Producto(product) {
 </div>
 
     `;
+       //Llamar a la función
+       mostrarProductosRelacionados(product.relatedProducts);
 }
 
 // URL de la API
@@ -81,6 +83,29 @@ function cargarComentarios() {
         })
         .catch(error => console.error('Error al cargar los comentarios:', error));
 }
+// Redirige a la página de información del producto
+function setProdID(id) {
+    localStorage.setItem("ProdID", id);  
+    window.location = "product-info.html";  
+  }
+
+//Función producto relacionado
+function mostrarProductosRelacionados(relatedProducts) {
+    const relatedContainer = document.getElementById("PRODUCTO_RELACIONADO");
+    PRODUCTO_RELACIONADO.innerHTML = "";
+      relatedProducts.forEach((relatedProduct) => {
+        relatedContainer.innerHTML += `
+          <div class="col-12 col-md-4 mb-3">
+            <div onclick="setProdID(${relatedProduct.id})" class="card cursor-active">
+            <img src="${relatedProduct.image}" class="card-img-top" alt="${relatedProduct.name}">
+              <div class="card-body">
+                <h5 class="card-title">${relatedProduct.name}</h5>
+            </div>
+          </div>
+        </div>
+            `;
+    });
+  }
 
 // getJSONData(PRODUCT_URL) devuelve los productos.
 getJSONData(PRODUCT_INFO_URL + productoID + ".json").then((result) => {
@@ -101,7 +126,9 @@ getJSONData(PRODUCT_INFO_URL + productoID + ".json").then((result) => {
         imagenPrincipal.src = this.src;
       });
       cargarComentarios();
+   
     });
+
   } else {
     console.error("No se pudieron obtener los datos:", result.data);
   }
