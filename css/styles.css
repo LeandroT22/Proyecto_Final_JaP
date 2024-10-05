@@ -246,3 +246,34 @@ a{ color: dimgray;
   
   
 
+  /*COMENTARIOS*/
+  .estrellas i {
+    color: #ffcc00; /* Color dorado para las estrellas */
+    margin-right: 5px;
+}
+
+.comentario-card {
+    margin-top: 40px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    width: 50%;
+    margin-left: 25%;
+
+}
+
+.comentario-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.usuario {
+    font-weight: bold;
+}
+
+.fecha {
+    color: #999;
+}

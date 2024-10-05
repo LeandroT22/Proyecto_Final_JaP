@@ -39,6 +39,49 @@ function Mostrar_Producto(product) {
     `;
 }
 
+// URL de la API
+let Comentarios_URL = (PRODUCT_INFO_COMMENTS_URL + productoID + ".json");
+
+// Función para crear estrellas de calificación con FontAwesome
+function crearEstrellas(rating) {
+    let estrellas = '';
+    for (let i = 0; i < 5; i++) {
+        if (i < rating) {
+            estrellas += '<i class="fas fa-star"></i>'; // Estrella completa
+        } else {
+            estrellas += '<i class="far fa-star"></i>'; // Estrella vacía
+        }
+    }
+    return estrellas;
+}
+
+// Función para cargar los comentarios desde la API
+function cargarComentarios() {
+    fetch(Comentarios_URL)
+        .then(response => response.json())
+        .then(data => {
+            let container = document.getElementById('comentarios');
+            container.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevos comentarios
+            data.forEach(comentario => {
+                let comentarioCard = document.createElement('div');
+                comentarioCard.classList.add('comentario-card');
+
+                comentarioCard.innerHTML = `
+                    <div class="comentario-header"> 
+                        <span class="usuario">@${comentario.user}</span>
+                        <div class="fecha">${comentario.dateTime}</div>
+                    </div>
+                    <div class="comentario-texto">${comentario.description}</div>
+                    <span class="estrellas">${crearEstrellas(comentario.score)}</span>
+                    </div>
+                `;
+
+                container.appendChild(comentarioCard);
+            });
+        })
+        .catch(error => console.error('Error al cargar los comentarios:', error));
+}
+
 // getJSONData(PRODUCT_URL) devuelve los productos.
 getJSONData(PRODUCT_INFO_URL + productoID + ".json").then((result) => {
   if (result.status === "ok") {
@@ -57,6 +100,7 @@ getJSONData(PRODUCT_INFO_URL + productoID + ".json").then((result) => {
         // Cambiar la imagen principal por la imagen bajo el cursor
         imagenPrincipal.src = this.src;
       });
+      cargarComentarios();
     });
   } else {
     console.error("No se pudieron obtener los datos:", result.data);
