@@ -107,13 +107,84 @@ function mostrarProductosRelacionados(relatedProducts) {
     });
   }
 
+  // Manejo de estrellas
+  let stars = document.querySelectorAll('#product-star-rating i');
+  stars.forEach((star, index) => {
+      star.addEventListener('click', () => {
+          calificacionSeleccionada = index + 2; // Guarda la calificación seleccionada
+          stars.forEach((s, i) => {
+              if (i <= index) {
+                  s.classList.replace('far', 'fas'); // Estrella llena
+              } else {
+                  s.classList.replace('fas', 'far'); // Estrella vacía
+              }
+          });
+      });
+  });
+
+  // Variables para almacenar la calificación y comentario
+let calificacionSeleccionada = 0;
+let comentarioUsuario = '';
+let usuario = localStorage.getItem("user") ;
+
+document.getElementById("botonEnviar").addEventListener("click", function() {
+    comentarioUsuario = document.getElementById("calificacionCliente").value; // Obtener el comentario del usuario
+
+    if(calificacionSeleccionada > 0 && comentarioUsuario !== '') {
+        // Crear el nuevo comentario en el contenedor
+        let nuevoComentario = {
+            user: usuario, // Aquí puedes poner el nombre del usuario si está disponible
+            dateTime: new Date().toLocaleString(),
+            description: comentarioUsuario,
+            score: calificacionSeleccionada
+        };
+
+        // Llamar a la función que crea el HTML del comentario y lo añade al contenedor
+        agregarComentario(nuevoComentario);
+
+        // Limpiar el campo de texto y las estrellas
+        document.getElementById("calificacionCliente").value = ''; 
+        resetEstrellas();
+    } else {
+        alert('Por favor, ingresa una calificación y un comentario.');
+    }
+});
+
+// Función para agregar el comentario al contenedor
+function agregarComentario(comentario) {
+    let container = document.getElementById('comentarios');
+    let comentarioCard = document.createElement('div');
+    comentarioCard.classList.add('comentario-card');
+
+    comentarioCard.innerHTML = `
+        <div class="comentario-header">
+            <span class="usuario">@${comentario.user}</span>
+            <div class="fecha">${comentario.dateTime}</div>
+        </div>
+        <div class="comentario-texto">${comentario.description}</div>
+        <span class="estrellas">${crearEstrellas(comentario.score)}</span>
+    `;
+
+    container.appendChild(comentarioCard);
+}
+
+// Función para resetear las estrellas después de enviar el comentario
+function resetEstrellas() {
+    let stars = document.querySelectorAll('#product-star-rating i');
+    stars.forEach(star => {
+        star.classList.replace('fas', 'far'); // Volver a estrellas vacías
+    });
+    calificacionSeleccionada = 0; // Resetear la calificación seleccionada
+}
+
+
 // getJSONData(PRODUCT_URL) devuelve los productos.
 getJSONData(PRODUCT_INFO_URL + productoID + ".json").then((result) => {
   if (result.status === "ok") {
     // Dado que solo tienes un producto, se pasa directamente al renderizador
     Mostrar_Producto(result.data);
     nombreCategoria.innerHTML =
-      `<a href="products.html">Volver</a> | <a href="categories.html">Categorías</a>  >  <a href="products.html">Productos</a>  > ` +
+      `<a href="products.html">Volver</a> | <a href="categories.html">Categorías</a>  >  ` +
       result.data.category;
     // Obtener el elemento de la imagen principal y todas las imágenes pequeñas
     const imagenPrincipal = document.getElementById("imagenPrincipal");
