@@ -277,3 +277,13 @@ a{ color: dimgray;
 .fecha {
     color: #999;
 }
+
+/*CALIFICACIÓN*/  
+#product-review{
+  width: 55%;
+  margin-left: 22%;
+}
+
+.fa-star{
+  color: #ffcc00;
+}
