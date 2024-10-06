@@ -111,7 +111,7 @@ function mostrarProductosRelacionados(relatedProducts) {
   let stars = document.querySelectorAll('#product-star-rating i');
   stars.forEach((star, index) => {
       star.addEventListener('click', () => {
-          calificacionSeleccionada = index + 2; // Guarda la calificación seleccionada
+          calificacionSeleccionada = index + 1; // Guarda la calificación seleccionada
           stars.forEach((s, i) => {
               if (i <= index) {
                   s.classList.replace('far', 'fas'); // Estrella llena
