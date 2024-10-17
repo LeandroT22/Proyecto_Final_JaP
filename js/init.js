@@ -56,3 +56,9 @@ function logout() {
   localStorage.removeItem("user");
   window.location.href = "login.html"; // Redirigir a la página de login
 }
+
+window.onload = function () {
+  if (localStorage.getItem('isLoggedIn') !== 'true') {
+        window.location.href = 'login.html'; 
+  }
+  };
