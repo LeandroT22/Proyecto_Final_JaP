@@ -22,14 +22,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function cargarDatosPerfil() {
+    document.getElementById("firstName").value = localStorage.getItem("nombre") || "";
+    document.getElementById("middleName").value = localStorage.getItem("segundoNombre") || "";
+    document.getElementById("lastName").value = localStorage.getItem("apellido") || "";
+    document.getElementById("secondLastName").value = localStorage.getItem("segundoApellido") || "";
+    document.getElementById("phone").value = localStorage.getItem("telefono") || "";
 
-    document.getElementById("firstName").value = "";
-    document.getElementById("middleName").value = "";
-    document.getElementById("lastName").value = "";
-    document.getElementById("secondLastName").value = "";
-    document.getElementById("phone").value = "";
-
-   
     let correo = localStorage.getItem("correo") || "";
     document.getElementById("email").value = correo; 
 }
