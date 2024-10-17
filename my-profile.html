@@ -55,12 +55,47 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <form id="profileForm">
+            <div class="mb-3">
+              <label for="firstName" class="form-label">Nombre*</label>
+              <input type="text" class="form-control" id="firstName" placeholder="Ingrese su nombre">
+            </div>
+            <div class="mb-3">
+              <label for="middleName" class="form-label">Segundo nombre</label>
+              <input type="text" class="form-control" id="middleName" placeholder="Ingrese su segundo nombre">
+            </div>
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Apellido*</label>
+              <input type="text" class="form-control" id="lastName" placeholder="Ingrese su apellido">
+            </div>
+            <div class="mb-3">
+              <label for="secondLastName" class="form-label">Segundo apellido</label>
+              <input type="text" class="form-control" id="secondLastName" placeholder="Ingrese su segundo apellido">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">E-mail*</label>
+              <input type="email" class="form-control" id="email" placeholder="Ingrese su email" readonly>
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Teléfono de contacto</label>
+              <input type="tel" class="form-control" id="phone" placeholder="Ingrese su teléfono">
+            </div>
+            <div class="mb-3">
+              <label for="profileImage" class="form-label">Foto de perfil</label>
+              <input type="file" class="form-control" id="profileImage">
+            </div>
+            <div class="form-check form-switch mb-3">
+              <input class="form-check-input" type="checkbox" id="darkModeSwitch">
+              <label class="form-check-label" for="darkModeSwitch">Modo Noche</label>
+            </div>
+            <button type="button" class="btn btn-primary" id="saveButton">Guardar cambios</button>
+          </form>
+        </div>
       </div>
     </div>
-  </main>
+  </main>  
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
