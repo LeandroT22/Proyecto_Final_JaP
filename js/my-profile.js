@@ -31,7 +31,7 @@ function cargarDatosPerfil() {
     darkModeSwitch.checked = localStorage.getItem('darkMode') === 'true';
     document.body.classList.toggle('dark-mode', darkModeSwitch.checked);
     
-    let correo = localStorage.getItem("correo") || "";
+    let correo = localStorage.getItem("currentUser") || "";
     document.getElementById("email").value = correo; 
 }
 
