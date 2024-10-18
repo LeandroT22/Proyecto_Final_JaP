@@ -43,7 +43,7 @@ let getJSONData = function(url){
 }
 document.addEventListener("DOMContentLoaded", function() {
   //nombre de usuario localStorage
-  const nombreUsuario = localStorage.getItem("user");
+  const nombreUsuario = localStorage.getItem("currentUser");
   
   // Verificar si hay un usuario autenticado
   if (nombreUsuario) {
@@ -54,17 +54,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Función de cierre de sesión
 function logout() {
-  localStorage.removeItem("isLoggedIn");
-  localStorage.removeItem("user");
+  localStorage.removeItem("currentUser");
   window.location.href = "login.html"; // Redirigir a la página de login
-  localStorage.clear();
 }
 
 window.onload = function () {
-  if (localStorage.getItem('isLoggedIn') !== 'true') {
-        window.location.href = 'login.html'; 
+  if (!localStorage.getItem('currentUser')) {
+    window.location.href = 'login.html';
   }
-  };
+};
+
 
         // Aplica el modo oscuro según la preferencia guardada
         if (localStorage.getItem('darkMode') === 'true') {
