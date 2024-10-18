@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById("loginForm");
+    let users = JSON.parse(localStorage.getItem('users')) || [];
 
     form.addEventListener("submit", function(e) {
         e.preventDefault(); 
@@ -12,9 +13,9 @@ document.addEventListener("DOMContentLoaded", function() {
             localStorage.setItem("isLoggedIn", "true");
             localStorage.setItem("user", username);
             localStorage.setItem("correo", username); 
-           
-
             window.location.href = "index.html";
+            users.push({ username, password });
+            localStorage.setItem('users', JSON.stringify(users));
         } else {
             alert("Por favor, complete ambos campos.");
         }
