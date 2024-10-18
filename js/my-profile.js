@@ -28,6 +28,9 @@ function cargarDatosPerfil() {
     document.getElementById("secondLastName").value = localStorage.getItem("segundoApellido") || "";
     document.getElementById("phone").value = localStorage.getItem("telefono") || "";
 
+    darkModeSwitch.checked = localStorage.getItem('darkMode') === 'true';
+    document.body.classList.toggle('dark-mode', darkModeSwitch.checked);
+    
     let correo = localStorage.getItem("correo") || "";
     document.getElementById("email").value = correo; 
 }
