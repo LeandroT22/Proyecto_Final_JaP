@@ -43,7 +43,7 @@ let getJSONData = function(url){
 }
 document.addEventListener("DOMContentLoaded", function() {
   //nombre de usuario localStorage
-  const nombreUsuario = localStorage.getItem("user");
+  const nombreUsuario = localStorage.getItem("currentUser");
   
   // Verificar si hay un usuario autenticado
   if (nombreUsuario) {
