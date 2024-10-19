@@ -32,7 +32,7 @@ function cargarDatosPerfil() {
     document.body.classList.toggle('dark-mode', darkModeSwitch.checked);
     
     let correo = localStorage.getItem("currentUser") || "";
-    document.getElementById("email").value = correo; 
+    document.getElementById("email2").value = correo; 
 }
 
 
