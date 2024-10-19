@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.setItem("segundoNombre", document.getElementById("middleName").value.trim());
             localStorage.setItem("apellido", document.getElementById("lastName").value.trim());
             localStorage.setItem("segundoApellido", document.getElementById("secondLastName").value.trim());
-            localStorage.setItem("correo", document.getElementById("email").value.trim());
+            localStorage.setItem("correo", document.getElementById("email2").value.trim());
             localStorage.setItem("telefono", document.getElementById("phone").value.trim());
 
             
@@ -39,10 +39,8 @@ function cargarDatosPerfil() {
 function validarFormulario() {
     let nombre = document.getElementById("firstName").value.trim();
     let apellido = document.getElementById("lastName").value.trim();
-    let correo = document.getElementById("email").value.trim();
     
-    
-    if (!nombre || !apellido || !correo) {
+    if (!nombre || !apellido) {
         alert("Por favor, complete todos los campos obligatorios (*).");
         return false; 
     }
