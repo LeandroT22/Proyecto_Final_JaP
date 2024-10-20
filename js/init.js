@@ -7,8 +7,6 @@ const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 
-let darkModeSwitch = document.getElementById('darkModeSwitch');
-
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
 }
@@ -55,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
 // Función de cierre de sesión
 function logout() {
   localStorage.removeItem("currentUser");
+  localStorage.removeItem("darkMode");
   window.location.href = "login.html"; // Redirigir a la página de login
 }
 
@@ -63,19 +62,3 @@ window.onload = function () {
     window.location.href = 'login.html';
   }
 };
-
-document.addEventListener("DOMContentLoaded", function() {
-  //nombre de usuario localStorage
-        // Aplica el modo oscuro según la preferencia guardada
-        if (localStorage.getItem('darkMode') === 'true') {
-          document.body.classList.add('dark-mode');
-          if (darkModeSwitch) {
-              darkModeSwitch.checked = true;
-          }
-      }
-
-// Manejar cambio de modo oscuro
-darkModeSwitch.addEventListener('change', function() {
-  document.body.classList.toggle('dark-mode');
-  });
-});
