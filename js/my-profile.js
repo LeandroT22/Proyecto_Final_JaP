@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let secondLastName = document.getElementById('secondLastName');
     let phone = document.getElementById('phone');
     let darkModeSwitch = document.getElementById('darkModeSwitch');
+    const profilePic = document.getElementById('profilePic');
 
     let correo = localStorage.getItem("currentUser") || "";
     document.getElementById("email2").value = correo; 
@@ -21,17 +22,21 @@ document.addEventListener('DOMContentLoaded', () => {
             lastName.value = preferences.lastName || '';
             secondLastName.value = preferences.secondLastName || '';
             phone.value = preferences.phone || '';
-
+            profilePic.src = preferences.picture || 'img/img_perfil.png';  
+            
             // Aplicar el tema oscuro si está activado
-            if (preferences.darkModeSwitch) {
-                document.body.classList.add('dark-theme');
-                darkModeSwitch.checked = false;
-            } else {
-                document.body.classList.remove('dark-theme');
+            if (preferences.darkModeSwitch === true) {
                 darkModeSwitch.checked = true;
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', true);
+            } else{
+                darkModeSwitch.checked = false;
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', false);
             }
         }
-    }
+        
+    }    
 
     // Obtener las preferencias del formulario
     function getPreferences() {
@@ -41,7 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
             middleName: middleName.value,
             lastName: lastName.value,
             secondLastName: secondLastName.value,
-            phone: phone.value
+            phone: phone.value,
+            picture: profilePic.src
         };
     }
 
@@ -54,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const expires = new Date(Date.now() + 365 * 100 * 24 * 60 * 60 * 1000).toUTCString();
         document.cookie = `preferences_${currentUser}=${JSON.stringify(preferences)}; expires=${expires}; path=/`;
 
-        alert('Preferencias guardadas');
+        alert('¡Cambios guardados!');
     }
 
     // Cargar las preferencias de localStorage o cookies
@@ -65,6 +71,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return null;
     }
+
+     // Manejar cambio de foto de perfil
+     profilePicInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                profilePic.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 
     function validarFormulario() {
         let nombre = document.getElementById("firstName").value.trim();
@@ -81,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     saveButton.addEventListener('click', () => {
         if (validarFormulario()) {
             savePreferences ()
+            location.reload();
         }
     });
 

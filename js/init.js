@@ -64,7 +64,8 @@ window.onload = function () {
   }
 };
 
-
+document.addEventListener("DOMContentLoaded", function() {
+  //nombre de usuario localStorage
         // Aplica el modo oscuro según la preferencia guardada
         if (localStorage.getItem('darkMode') === 'true') {
           document.body.classList.add('dark-mode');
@@ -76,5 +77,5 @@ window.onload = function () {
 // Manejar cambio de modo oscuro
 darkModeSwitch.addEventListener('change', function() {
   document.body.classList.toggle('dark-mode');
-  localStorage.setItem('darkMode', darkModeSwitch.checked);
   });
+});
