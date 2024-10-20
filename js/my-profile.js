@@ -28,11 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (preferences.darkModeSwitch === true) {
                 darkModeSwitch.checked = true;
                 document.body.classList.add('dark-mode');
-                localStorage.setItem('darkMode', true);
             } else{
                 darkModeSwitch.checked = false;
                 document.body.classList.remove('dark-mode');
-                localStorage.setItem('darkMode', false);
             }
         }
         
@@ -103,7 +101,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Manejar cambio de modo oscuro
+darkModeSwitch.addEventListener('change', function() {
+    document.body.classList.toggle('dark-mode');
+    });
+
     // Cargar y aplicar preferencias al iniciar
-    const initialPreferences = loadPreferences();
+    let initialPreferences = loadPreferences();
     applyPreferences(initialPreferences);
 });
