@@ -143,7 +143,7 @@ stars.forEach((star, index) => {
 // Variables para almacenar la calificación y comentario
 let calificacionSeleccionada = 0;
 let comentarioUsuario = '';
-let usuario = localStorage.getItem("user");
+let usuario = localStorage.getItem("currentUser");
 
 document.getElementById("botonEnviar").addEventListener("click", function() {
   comentarioUsuario = document.getElementById("calificacionCliente").value; // Obtener el comentario del usuario
