@@ -1,13 +1,16 @@
 // Mstrar el producto en el carrito
 function displayCartProduct() {
-    const cartProduct = JSON.parse(localStorage.getItem('productoComprado'));
-    const cartContainer = document.getElementById('cart-container');
+    const currentUser = localStorage.getItem('currentUser');
+    let cartProducts = JSON.parse(localStorage.getItem(`carrito_${currentUser}`)) || [];
+    let cartContainer = document.getElementById('cart-container');
 
-    // Verificar si hay un producto en el carrito
-    if (!cartProduct) {
+    // Verificar si hay productos en el carrito
+    if (cartProducts.length === 0) {
         cartContainer.innerHTML = '<p>No hay productos en el carrito.</p>';
     } else {
-        cartContainer.innerHTML = `
+        cartContainer.innerHTML = '';
+        cartProducts.forEach(cartProduct => {
+            cartContainer.innerHTML += `
             <div class="row align-items-center mt-4">
                 <div class="col-2">
                     <img src="${cartProduct.image}" class="img-fluid rounded" alt="${cartProduct.name}">
@@ -32,8 +35,9 @@ function displayCartProduct() {
                 <h4 class="fw-bold">Subtotal: <span class="text-success" id="subtotal"> ${cartProduct.currency} ${cartProduct.cost}</span></h4>
             </div>
         `;
-    }
+    });
 }
+};
 
 // Mostrar el producto en el carrito al cargar la página
 document.addEventListener('DOMContentLoaded', displayCartProduct);
