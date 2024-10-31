@@ -1,6 +1,7 @@
 let productoID = localStorage.getItem("ProdID");
 let listaDeProductos = document.getElementById("PRODUCTO");
 let nombreCategoria = document.getElementById("NOMBRE_CAT_PROD");
+const currentUser = localStorage.getItem('currentUser');
 
 function Mostrar_Producto(product) {
   PRODUCTO.innerHTML = `
@@ -52,8 +53,10 @@ function Mostrar_Producto(product) {
       cost: product.cost,
       image: product.images[0],
     };
-    localStorage.setItem("productoComprado", JSON.stringify(productoComprado));
-
+    let carrito = [];
+    carrito = JSON.parse(localStorage.getItem(`carrito_${currentUser}`) || '[]');
+    carrito.push(productoComprado)
+    localStorage.setItem(`carrito_${currentUser}`, JSON.stringify(carrito));
     // Navegar a cart.html
     window.location.href = "cart.html";
   });
