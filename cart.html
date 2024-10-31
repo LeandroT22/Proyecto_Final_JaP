@@ -29,12 +29,19 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link"  href="my-profile.html" id="nombreUsuario"></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="login.html" id="logout">Cerrar sesión</a>
-        </li>
+          <div class="dropdown">
+            <!-- Botón nombre del usuario -->
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="nombreUsuarioBtn">
+            </button>
+            
+            <!-- Menú desplegable -->
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+              <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="login.html" onclick="logout()">Cerrar sesión</a></li>
+            </ul>
+          </div>
         </ul>
       </div>
     </div>
@@ -65,6 +72,7 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
+  <script src="js/tema.js"></script>
 </body>
 
 </html>

@@ -295,3 +295,22 @@ a{ color: dimgray;
   font-size: large;
   margin-bottom: 20px;
 }
+
+/*Modo noche*/  
+body.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+.dark-mode .card {
+  background-color: #444;
+  color: #fff;
+}
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  object-fit:cover;
+  border-radius: 50%;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+}
