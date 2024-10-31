@@ -31,15 +31,15 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <div class="dropdown">
-            <!-- Botón nombre del usuario -->
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="nombreUsuarioBtn">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false" id="nombreUsuarioBtn">
             </button>
-            
-            <!-- Menú desplegable -->
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
               <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
-              <li><hr class="dropdown-divider"></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
               <li><a class="dropdown-item" href="login.html" onclick="logout()">Cerrar sesión</a></li>
             </ul>
           </div>
@@ -47,18 +47,13 @@
       </div>
     </div>
   </nav>
+
   <main>
-    <!--<div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
-    </div>-->
     <div class="container-fluid m-auto">
-      <h6 class="title" id="NOMBRE_CAT_PROD"></h6 >
+      <h6 class="title" id="NOMBRE_CAT_PROD"></h6>
       <div class="row row-cols-1 row-cols-md-3 g-4" id="PRODUCTO"></div>
     </div>
-    <div id="comentarios">
-    </div>
+    <div id="comentarios"></div>
     <div id="product-review" class="border p-3 mb-3" style="margin-top: 20px;">
       <h5>Califica este producto</h5>
       <div id="product-star-rating" class="mb-2">
@@ -68,28 +63,23 @@
         <i class="far fa-star"></i>
         <i class="far fa-star"></i>
       </div>
-      <textarea
-        id="calificacionCliente"
-        class="form-control mb-2"
-        placeholder="Ingresa tu comentario..."
-      ></textarea>
+      <textarea id="calificacionCliente" class="form-control mb-2" placeholder="Ingresa tu comentario..."></textarea>
       <div class="d-flex justify-content-between align-items-center"></div>
       <button id="botonEnviar" class="btn btn-primary">Enviar Reseña</button>
     </div>
-  </div>
-  <div class="container mt-5 justify-content-center" >
-    <div class="row">
-      <div class="col-12 text-center">
-        <h4 id="tittleRelatedProduct">PRODUCTOS RELACIONADOS</h4>
-      </div>
-      <div class="col-12 col-md-12">
-        <div class="row justify-content-center" id="PRODUCTO_RELACIONADO">
+
+    <div class="container mt-5 justify-content-center">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h4 id="tittleRelatedProduct">PRODUCTOS RELACIONADOS</h4>
+        </div>
+        <div class="col-12 col-md-12">
+          <div class="row justify-content-center" id="PRODUCTO_RELACIONADO"></div>
         </div>
       </div>
     </div>
-    
-  </div>
   </main>
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
@@ -98,6 +88,7 @@
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
     </div>
   </footer>
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
@@ -106,6 +97,7 @@
       <div></div>
     </div>
   </div>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
