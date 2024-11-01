@@ -211,6 +211,7 @@ a.custom-card:hover {
 }
 body {
   background-color: rgb(248, 249, 250);
+  transition: all 0.3s ease;
 }
 .login-container {
   max-width: 400px;
@@ -305,6 +306,11 @@ body.dark-mode {
   background-color: #444;
   color: #fff;
 }
+.dark-mode .comentario-card{
+  background-color: #444;
+  color: #fff;
+}
+
 .profile-pic {
   width: 150px;
   height: 150px;
