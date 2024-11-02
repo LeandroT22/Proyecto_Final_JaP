@@ -62,3 +62,10 @@ window.onload = function () {
     window.location.href = 'login.html';
   }
 };
+document.addEventListener("DOMContentLoaded", function() {
+  const currentUser = localStorage.getItem('currentUser');
+  let badge = document.getElementById('cartBadge');
+  let cartProducts = JSON.parse(localStorage.getItem(`carrito_${currentUser}`)) || [];
+
+  badge.innerHTML = ` ${cartProducts.length}`;
+});
