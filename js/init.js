@@ -47,7 +47,9 @@ document.addEventListener("DOMContentLoaded", function() {
   if (nombreUsuario) {
       // Cambiar el texto del botón para mostrar el nombre del usuario
       document.getElementById("nombreUsuarioBtn").textContent = nombreUsuario;
-  } 
+  } else{
+    window.location.href = "login.html";
+  }
 });
 
 // Función de cierre de sesión
