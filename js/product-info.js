@@ -43,24 +43,38 @@ function Mostrar_Producto(product) {
   // Llamada para cargar los productos relacionados
   mostrarProductosRelacionados(product.relatedProducts);
 
-  // Añadir el evento al botón "Comprar" para guardar en localStorage y navegar a cart.html
   document.getElementById("comprarBtn").addEventListener("click", function () {
-    // Guardar información del producto en localStorage
-    const productoComprado = {
-      id: product.id,
-      name: product.name,
-      currency: product.currency,
-      cost: product.cost,
-      image: product.images[0],
-    };
-    let carrito = [];
-    carrito = JSON.parse(localStorage.getItem(`carrito_${currentUser}`) || '[]');
-    carrito.push(productoComprado)
+    // Obtener el carrito del localStorage y convertirlo en un array o un array vacío si no existe
+    let carrito = JSON.parse(localStorage.getItem(`carrito_${currentUser}`) || '[]');
+   
+    // Encontrar si el producto ya existe en el carrito
+    const productoExistente = carrito.find(item => item.id === product.id);
+ 
+    if (productoExistente) {
+      // Si el producto ya está en el carrito, incrementar la cantidad
+      window.location.href = "cart.html";
+    } else {
+      // Si el producto no está en el carrito, añadirlo con cantidad = 1
+      const productoComprado = {
+        id: product.id,
+        name: product.name,
+        currency: product.currency,
+        cost: product.cost,
+        image: product.images[0],
+        cantidad: 1
+      };
+      carrito.push(productoComprado);
+    }
+ 
+    // Guardar el carrito actualizado en el localStorage
     localStorage.setItem(`carrito_${currentUser}`, JSON.stringify(carrito));
+ 
     // Navegar a cart.html
     window.location.href = "cart.html";
   });
+ 
 }
+
 
 // URL de la API
 let Comentarios_URL = (PRODUCT_INFO_COMMENTS_URL + productoID + ".json");

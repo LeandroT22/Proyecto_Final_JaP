@@ -57,15 +57,13 @@ function logout() {
   window.location.href = "login.html"; // Redirigir a la página de login
 }
 
-window.onload = function () {
-  if (!localStorage.getItem('currentUser')) {
-    window.location.href = 'login.html';
-  }
-};
 document.addEventListener("DOMContentLoaded", function() {
   const currentUser = localStorage.getItem('currentUser');
   let badge = document.getElementById('cartBadge');
   let cartProducts = JSON.parse(localStorage.getItem(`carrito_${currentUser}`)) || [];
+ 
+  const cantidadTotal = cartProducts.reduce((accum, product) => accum + product.cantidad, 0);
 
-  badge.innerHTML = ` ${cartProducts.length}`;
+
+  badge.innerHTML = ` ${cantidadTotal}`;
 });
