@@ -7,7 +7,12 @@ function displayCartProduct() {
 
     // Verificar si hay productos en el carrito
     if (cartProducts.length === 0) {
-        cartContainer.innerHTML = '<p>No hay productos en el carrito.</p>';
+        cartContainer.innerHTML = `
+            <div class="textoCarrito">
+                <p style="font-size: 160%;">Carrito vacío</p>
+                <a href="categories.html" style="color: cornflowerblue;">Agrega productos a tu carrito aquí</a>
+            </div>
+        `;
     } else {
         cartContainer.innerHTML = '';
         cartProducts.forEach((cartProduct, index) => {
