@@ -1,3 +1,37 @@
+let currentTabIndex = 0;
+
+function nextTab() {
+    // Obtener todos los elementos de pestañas
+    const tabs = document.querySelectorAll('#myTab .nav-link');
+    // Ocultar la pestaña actual
+    tabs[currentTabIndex].classList.remove('active');
+    document.getElementById(tabs[currentTabIndex].getAttribute('data-bs-target').substring(1)).classList.remove('show', 'active');
+
+
+    // Avanzar al siguiente índice de pestaña
+    currentTabIndex = (currentTabIndex + 1) % tabs.length;
+
+
+    // Mostrar la nueva pestaña
+    tabs[currentTabIndex].classList.add('active');
+    document.getElementById(tabs[currentTabIndex].getAttribute('data-bs-target').substring(1)).classList.add('show', 'active');
+}
+
+function prevTab() {
+    // Obtener todos los elementos de pestañas
+    const tabs = document.querySelectorAll('#myTab .nav-link');
+    // Ocultar la pestaña actual
+    tabs[currentTabIndex].classList.remove('active');
+    document.getElementById(tabs[currentTabIndex].getAttribute('data-bs-target').substring(1)).classList.remove('show', 'active');
+
+    // Retroceder al índice de la pestaña anterior
+    currentTabIndex = (currentTabIndex - 1 + tabs.length) % tabs.length;
+
+    // Mostrar la nueva pestaña
+    tabs[currentTabIndex].classList.add('active');
+    document.getElementById(tabs[currentTabIndex].getAttribute('data-bs-target').substring(1)).classList.add('show', 'active');
+}
+
 // Mostrar el producto en el carrito
 function displayCartProduct() {
   const currentUser = localStorage.getItem("currentUser");
@@ -54,85 +88,89 @@ function displayCartProduct() {
             `;
 
             shippingOptions.innerHTML = `
-<div class="centered-container">
-        <div class="form-content">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="envio-tab" data-bs-toggle="tab" data-bs-target="#envio-tab-pane" type="button" role="tab" aria-controls="envio-tab-pane" aria-selected="true">Método de envío</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pago-tab" data-bs-toggle="tab" data-bs-target="#pago-tab-pane" type="button" role="tab" aria-controls="pago-tab-pane" aria-selected="false">Forma de pago</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="costos-tab" data-bs-toggle="tab" data-bs-target="#costos-tab-pane" type="button" role="tab" aria-controls="costos-tab-pane" aria-selected="false">Costos</button>
-        </li>
-      </ul>
-      <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="envio-tab-pane" role="tabpanel" aria-labelledby="envio-tab" tabindex="0">
-            <br>
-            <h5 class="card-title">Tipo de envío</h5><br>
-            <div id= "inputradio">  
-            <form>
-            <input type="radio" id="html" name="option" value="HTML">
-            <label for="html">Premium 2 a 5 días (15%)</label><br>
-            <input type="radio" id="css" name="option" value="CSS">
-            <label for="css">Express 5 a 8 días (7%)</label><br>
-            <input type="radio" id="javascript" name="option" value="JavaScript">
-            <label for="javascript">Standard 12 a 15 días (5%)</label>
-        </form><br>
-    </div>
-            <h5 class="card-title">Dirección de envío</h5><br>
-        <form >
-            <label for="fname">Departamento:</label>
-            <input type="text" id="fname" name="fname"><br><br>
-            <label for="lname">Localidad:</label>
-            <input type="text" id="lname" name="lname"><br><br>
-            <label for="lname">Calle:</label>
-            <input type="text" id="lname" name="lname"><br><br>
-            <label for="lname">Número:</label>
-            <input type="text" id="lname" name="lname"><br><br>
-            <label for="lname">Esquina:</label>
-            <input type="text" id="lname" name="lname"><br><br>
-        </form>
-        <div class="nav-item" role="presentation">
-        <button class="btn btn-primary" id="pago-tab2" data-bs-toggle="tab" data-bs-target="#pago-tab-pane" type="button" role="tab" aria-controls="pago-tab-pane" aria-selected="true">Siguiente</button>
-    </div>
-    </div>
+<div class="d-flex justify-content-center align-items-center" style="text-align: center;border: solid lightgrey; padding:10px;">
+    <div class="container mt-5" style="max-width: 600px;">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist" hidden>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1" aria-selected="true">Método de envío</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2" type="button" role="tab" aria-controls="tab2" aria-selected="false">Forma de pago</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3" type="button" role="tab" aria-controls="tab3" aria-selected="false">Costos</button>
+            </li>
+        </ul>
 
-        <div class="tab-pane fade" id="pago-tab-pane" role="tabpanel" aria-labelledby="pago-tab" tabindex="0">
-            <form>
+        <!-- Tab content -->
+        <div class="tab-content mt-3">
+            <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
                 <br>
-                <input type="radio" id="html" name="option" value="HTML">
-            <label for="html">Tarjeta de crédito</label><br><br>
-            <label for="fname">Número:</label>
-            <input type="text" id="fname" name="fname"><br><br>
-            <label for="lname">Fecha de vencimiento:</label>
-            <input type="text" id="lname" name="lname"><br><br>
-            <label for="lname">Código verificador:</label>
-            <input type="text" id="lname" name="lname"><br><br>
-            <br>
-            <input type="radio" id="html" name="option" value="HTML">
-            <label for="html">Transferencia bancaria</label><br><br>
-            <label for="fname">Número de cuenta:</label>
-            <input type="text" id="fname" name="fname"><br><br>
-            </form>
-            <button class="btn btn-primary">Siguiente</button>
-        </div>
-
-        <div class="tab-pane fade" id="costos-tab-pane" role="tabpanel" aria-labelledby="costos-tab" tabindex="0">
-            <br>
-            <p>Subtotal: $$$</p>
-            <br>
-            <p>Costo de envío: $$$</p>
-            <br>
-            <p>Total: $$$</p>
-            <br><br>
-            <button class="btn btn-primary">Finalizar compra</button>
+                <h5 class="card-title text-center">Tipo de envío</h5><br>
+                <div id="inputradio">
+                    <form>
+                        <input type="radio" id="option1" name="option" value="1">
+                        <label for="option1">Premium 2 a 5 días (15%)</label><br>
+                        <input type="radio" id="option2" name="option" value="2">
+                        <label for="option2">Express 5 a 8 días (7%)</label><br>
+                        <input type="radio" id="option3" name="option" value="3">
+                        <label for="option3">Standard 12 a 15 días (5%)</label>
+                    </form><br>
+                </div>
+                <h5 class="card-title text-center">Dirección de envío</h5><br>
+                <form>
+                    <label for="dp">Departamento:</label>
+                    <input type="text" id="dp" name="dp"><br><br>
+                    <label for="local">Localidad:</label>
+                    <input type="text" id="local" name="local"><br><br>
+                    <label for="st">Calle:</label>
+                    <input type="text" id="st" name="st"><br><br>
+                    <label for="n">Número:</label>
+                    <input type="text" id="n" name="n"><br><br>
+                    <label for="corner">Esquina:</label>
+                    <input type="text" id="corner" name="corner"><br><br>
+                </form>
+                <button class="btn btn-primary mt-3" onclick="nextTab()">Siguiente</button>
+            </div>
+            <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                <form>
+                    <br>
+                    <input type="radio" id="card" name="option" value="method1">
+                    <label for="card">Tarjeta de crédito</label><br><br>
+                    <label for="ncard">Número:</label>
+                    <input type="text" id="ncard" name="ncard"><br><br>
+                    <label for="date">Fecha de vencimiento:</label>
+                    <input type="text" id="date" name="date"><br><br>
+                    <label for="vc">Código verificador:</label>
+                    <input type="text" id="vc" name="vc"><br><br>
+                    <br>
+                    <input type="radio" id="bank" name="option" value="method2">
+                    <label for="bank">Transferencia bancaria</label><br><br>
+                    <label for="naccount">Número de cuenta:</label>
+                    <input type="text" id="naccount" name="naccount"><br><br>
+                </form>
+                <button class="btn btn-primary mt-3" onclick="prevTab()">Volver</button>
+                <button class="btn btn-primary mt-3" onclick="nextTab()">Siguiente</button>
+            </div>
+            <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+                <br>
+                <p>Subtotal: $$$</p>
+                <br>
+                <p>Costo de envío: $$$</p>
+                <br>
+                <p>Total: $$$</p>
+                <br><br>
+                <button class="btn btn-primary">Finalizar compra</button>
+                <br>
+                <button class="btn btn-primary mt-3" onclick="prevTab()">Volver</button>
+            </div>
         </div>
     </div>
-      </div>
-    </div>
+</div>
 `;
+
+            
 
     });
 
