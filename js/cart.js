@@ -8,6 +8,7 @@ function displayCartProduct() {
 
   // Verificar si hay productos en el carrito
   if (cartProducts.length === 0) {
+    shippingOptions.innerHTML = "";
     cartContainer.innerHTML = `
             <div class="textoCarrito">
                 <p style="font-size: 160%;">Carrito vacío</p>
@@ -51,16 +52,8 @@ function displayCartProduct() {
                 </div>
             </div>
             `;
-    });
 
-    // Agregar el total general al final del carrito
-    cartContainer.innerHTML += `
-            <div style="text-align: center; margin-top: 10%; font-size: xx-large;">
-                <h4 class="fw-bold">Total: <span class="text-success" id="total"></span></h4>
-            </div>
-        `;
-
-shippingOptions.innerHTML = `
+            shippingOptions.innerHTML = `
 <div class="centered-container">
         <div class="form-content">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -140,6 +133,15 @@ shippingOptions.innerHTML = `
       </div>
     </div>
 `;
+
+    });
+
+    // Agregar el total general al final del carrito
+    cartContainer.innerHTML += `
+            <div style="text-align: center; margin-top: 10%; font-size: xx-large;">
+                <h4 class="fw-bold">Total: <span class="text-success" id="total"></span></h4>
+            </div>
+        `;
 
     // Calcular y mostrar el total inicial
     updateTotal();
