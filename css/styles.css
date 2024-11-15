@@ -339,6 +339,6 @@ body.dark-mode {
 }
 .form-content {
   width: 100%;
-  max-width: fit-content; /* Ajusta el ancho según sea necesario */
+  max-width: fit-content; 
 }
 
