@@ -110,45 +110,45 @@ function displayCartProduct() {
                 <h5 class="card-title text-center">Tipo de envío</h5><br>
                 <div id="inputradio">
                     <form>
-                        <input type="radio" id="option1" name="option" value="1">
+                        <input type="radio" id="envio-premium" name="forma-envio" value="premium">
                         <label for="option1">Premium 2 a 5 días (15%)</label><br>
-                        <input type="radio" id="option2" name="option" value="2">
+                        <input type="radio" id="envio-express" name="forma-envio" value="express">
                         <label for="option2">Express 5 a 8 días (7%)</label><br>
-                        <input type="radio" id="option3" name="option" value="3">
+                        <input type="radio" id="envio-standar" name="forma-envio" value="standar">
                         <label for="option3">Standard 12 a 15 días (5%)</label>
                     </form><br>
                 </div>
                 <h5 class="card-title text-center">Dirección de envío</h5><br>
-                <form>
-                    <label for="dp">Departamento:</label>
-                    <input type="text" id="dp" name="dp"><br><br>
-                    <label for="local">Localidad:</label>
-                    <input type="text" id="local" name="local"><br><br>
-                    <label for="st">Calle:</label>
-                    <input type="text" id="st" name="st"><br><br>
-                    <label for="n">Número:</label>
-                    <input type="text" id="n" name="n"><br><br>
-                    <label for="corner">Esquina:</label>
-                    <input type="text" id="corner" name="corner"><br><br>
-                </form>
-                <button class="btn btn-primary mt-3" onclick="nextTab()">Siguiente</button>
+                    <form>
+                      <label for="dp">Departamento:</label>
+                      <input type="text" id="dp" name="dp"><br><br>
+                      <label for="local">Localidad:</label>
+                      <input type="text" id="local" name="local"><br><br>
+                      <label for="st">Calle:</label>
+                      <input type="text" id="st" name="st"><br><br>
+                      <label for="n">Número:</label>
+                      <input type="text" id="n" name="n"><br><br>
+                      <label for="corner">Esquina:</label>
+                      <input type="text" id="corner" name="corner"><br><br>
+                    </form>
+                    <button class="btn btn-primary mt-3" onclick="nextTab()">Siguiente</button>
             </div>
             <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
                 <form>
                     <br>
-                    <input type="radio" id="card" name="option" value="method1">
-                    <label for="card">Tarjeta de crédito</label><br><br>
-                    <label for="ncard">Número:</label>
-                    <input type="text" id="ncard" name="ncard"><br><br>
-                    <label for="date">Fecha de vencimiento:</label>
-                    <input type="text" id="date" name="date"><br><br>
-                    <label for="vc">Código verificador:</label>
-                    <input type="text" id="vc" name="vc"><br><br>
+                    <input type="radio" id="tarjeta" name="forma-pago" value="tarjeta">
+                    <label for="html">Tarjeta de crédito</label><br><br>
+                    <label for="numero-tarjeta">Número de tarjeta:</label>
+                    <input type="text" id="numero-tarjeta" name="numero-tarjeta"><br><br>
+                    <label for="vencimiento">Fecha de vencimiento:</label>
+                    <input type="text" id="vencimiento" name="vencimiento"><br><br>
+                    <label for="codigo-verificador">Código verificador:</label>
+                    <input type="text" id="codigo-verificador" name="codigo-verificador"><br><br>
                     <br>
-                    <input type="radio" id="bank" name="option" value="method2">
-                    <label for="bank">Transferencia bancaria</label><br><br>
-                    <label for="naccount">Número de cuenta:</label>
-                    <input type="text" id="naccount" name="naccount"><br><br>
+                    <input type="radio" id="transferencia" name="forma-pago" value="transferencia">
+                    <label for="html">Transferencia bancaria</label><br><br>
+                    <label for="cuenta-bancaria">Número de cuenta:</label>
+                    <input type="text" id="cuenta-bancaria" name="cuenta-bancaria"><br><br>
                 </form>
                 <button class="btn btn-primary mt-3" onclick="prevTab()">Volver</button>
                 <button class="btn btn-primary mt-3" onclick="nextTab()">Siguiente</button>
@@ -161,7 +161,7 @@ function displayCartProduct() {
                 <br>
                 <p>Total: $$$</p>
                 <br><br>
-                <button class="btn btn-primary">Finalizar compra</button>
+                <button class="btn btn-primary" id="BtnFinalizarCompra">Finalizar compra</button>
                 <br>
                 <button class="btn btn-primary mt-3" onclick="prevTab()">Volver</button>
             </div>
@@ -183,6 +183,11 @@ function displayCartProduct() {
 
     // Calcular y mostrar el total inicial
     updateTotal();
+  }
+
+    //Funcionalidad botón Finalizar compra
+  if (document.getElementById("BtnFinalizarCompra")) {
+   document.getElementById("BtnFinalizarCompra").addEventListener("click", finalizarCompra);
   }
   
 }
@@ -236,4 +241,67 @@ function updateTotal() {
 
 // Mostrar el producto en el carrito al cargar la página
 document.addEventListener("DOMContentLoaded", displayCartProduct);
+
+//Validar los campos y mostrar mensaje de compra exitosa
+
+function finalizarCompra() {
+
+  //Validar dirección
+  const departamento = document.getElementById("dp").value.trim();
+  const localidad = document.getElementById("local").value.trim();
+  const calle = document.getElementById("st").value.trim();
+  const numero = document.getElementById("n").value.trim();
+  const esquina = document.getElementById("corner").value.trim();
+
+  if (!departamento || !localidad || !calle || !numero || !esquina) {
+    alert("Por favor, completa todos los campos de la dirección.");
+    return;
+}
+
+// Validar forma de envío
+const formaEnvio = document.querySelector('input[name="forma-envio"]:checked');
+if (!formaEnvio) {
+    alert("Por favor, selecciona una forma de envío.");
+    return;
+}
+
+// Validar cantidad de productos
+const cantidades = document.querySelectorAll(".product-quantity");
+for (let cantidad of cantidades) {
+    if (cantidad.value <= 0 || cantidad.value === "") {
+        alert("Por favor, define una cantidad válida para todos los productos.");
+        return;
+    }
+}
+
+ // Validar forma de pago
+ const formaPago = document.querySelector('input[name="forma-pago"]:checked');
+ if (!formaPago) {
+     alert("Por favor, selecciona una forma de pago.");
+     return;
+ }
+
+  // Validar campos asociados a la forma de pago
+  if (formaPago.value === "tarjeta") {
+    const numeroTarjeta = document.getElementById("numero-tarjeta").value.trim();
+    const vencimiento = document.getElementById("vencimiento").value.trim();
+    const codigoVerificador = document.getElementById("codigo-verificador").value.trim();
+    if (!numeroTarjeta || !vencimiento || !codigoVerificador) {
+      alert("Por favor, completa todos los campos de la tarjeta de crédito.");
+      return;
+  }
+} else if (formaPago.value === "transferencia") {
+  const numeroCuenta = document.getElementById("cuenta-bancaria").value.trim();
+  if (!numeroCuenta) {
+      alert("Por favor, completa el campo del número de cuenta bancaria.");
+      return;
+  }
+}
+
+// Se cumplen todas las validaciones
+const carritoUser = `carrito_${localStorage.getItem("currentUser")}`;
+alert("¡Compra exitosa! Gracias por tu compra.");
+localStorage.removeItem(carritoUser);
+location.reload();
+};
 
