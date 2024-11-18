@@ -3,8 +3,20 @@
   'use strict'
 
 
+
+
+
+
+
+
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   var forms = document.querySelectorAll('.needs-validation')
+
+
+
+
+
+
 
 
   // Loop over them and prevent submission
@@ -17,6 +29,12 @@
         }
 
 
+
+
+
+
+
+
         form.classList.add('was-validated')
       }, false);
     })
@@ -25,7 +43,25 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 let currentTabIndex = 0;
+
+
+
+
+
+
 
 
 function validateCurrentTab() {
@@ -42,6 +78,12 @@ function validateCurrentTab() {
 }
 
 
+
+
+
+
+
+
 function nextTab() {
   if (validateCurrentTab()) {
       const tabs = document.querySelectorAll('#myTab .nav-link');
@@ -49,8 +91,20 @@ function nextTab() {
       document.getElementById(tabs[currentTabIndex].getAttribute('data-bs-target').substring(1)).classList.remove('show', 'active');
 
 
+
+
+
+
+
+
       // Avanzar al siguiente índice de pestaña
       currentTabIndex = (currentTabIndex + 1) % tabs.length;
+
+
+
+
+
+
 
 
       // Mostrar la nueva pestaña
@@ -60,20 +114,44 @@ function nextTab() {
 }
 
 
+
+
+
+
+
+
 function prevTab() {
   const tabs = document.querySelectorAll('#myTab .nav-link');
   tabs[currentTabIndex].classList.remove('active');
   document.getElementById(tabs[currentTabIndex].getAttribute('data-bs-target').substring(1)).classList.remove('show', 'active');
 
 
+
+
+
+
+
+
   // Retroceder al índice de la pestaña anterior
   currentTabIndex = (currentTabIndex - 1 + tabs.length) % tabs.length;
+
+
+
+
+
+
 
 
   // Mostrar la nueva pestaña
   tabs[currentTabIndex].classList.add('active');
   document.getElementById(tabs[currentTabIndex].getAttribute('data-bs-target').substring(1)).classList.add('show', 'active');
 }
+
+
+
+
+
+
 
 
 // Mostrar el producto en el carrito
@@ -83,6 +161,12 @@ function displayCartProduct() {
     JSON.parse(localStorage.getItem(`carrito_${currentUser}`)) || [];
   let cartContainer = document.getElementById("cart-container");
   let shippingOptions = document.getElementById("shipping");
+
+
+
+
+
+
 
 
   // Verificar si hay productos en el carrito
@@ -133,6 +217,12 @@ function displayCartProduct() {
             `;
 
 
+
+
+
+
+
+
             shippingOptions.innerHTML = `<div class="container mt-5">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" id="myTab" role="tablist" hidden>
@@ -146,6 +236,18 @@ function displayCartProduct() {
             <button class="nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3" type="button" role="tab" aria-controls="tab3" aria-selected="false">Costos</button>
         </li>
     </ul>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -257,29 +359,87 @@ function displayCartProduct() {
               <button class="btn btn-primary mt-3" onclick="prevTab()">Volver</button>
               <button type="submit" class="btn btn-primary mt-3" onclick="nextTab()">Siguiente</button>
         </div>
-        <!-- TAB3 -->
-        <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
-            <br>
-            <h5 class="card-title">Costos</h5><br>
-            <p>Subtotal: $$$</p>
-            <br>
-            <p>Costo de envío: $$$</p>
-            <br>
-            <p>Total: $$$</p>
-            <br><br>
-            <button id="BtnFinalizarCompra" class="btn btn-primary">Finalizar compra</button>
-            <br>
-            <button class="btn btn-primary mt-3" onclick="prevTab()">Volver</button>
-        </div>
+      <!-- TAB3 -->
+<div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+  <br>
+  <h5 class="card-title">Costos</h5><br>
+  <p id="subtotalTab">Subtotal: </p>
+  <br>
+  <p id="shippingTab">Costo de envío: </p>
+  <br>
+  <p id="totalTab" style="color: green;">Total: </p>
+  <br><br>
+  <button id="BtnFinalizarCompra" class="btn btn-primary">Finalizar compra</button>
+  <br>
+  <button class="btn btn-primary mt-3" onclick="prevTab()">Volver</button>
+</div>
+
+
     </div>
 </div>
 `;
 
 
-           
+calculateTotals(); // Calcular y mostrar los totales iniciales
+
+
+function updateShippingCost() {
+  const selectedOption = document.querySelector('input[name="radio-stacked"]:checked');
+  if (!selectedOption) return 0; // Sin opción seleccionada, costo es 0
+  const shippingRates = {
+    "validationFormCheck1": 0.15, // Premium
+    "validationFormCheck2": 0.07, // Express
+    "validationFormCheck3": 0.05, // Standard
+  };
+  return shippingRates[selectedOption.id] || 0;
+}
+
+
+function calculateTotals() {
+  const currentUser = localStorage.getItem("currentUser");
+  let cartProducts = JSON.parse(localStorage.getItem(`carrito_${currentUser}`)) || [];
+ 
+  let subtotal = 0;
+
+
+  // Calcular subtotal
+  cartProducts.forEach((product) => {
+    const productTotal =
+      product.currency === "USD"
+        ? product.cost * 44 * product.cantidad
+        : product.cost * product.cantidad;
+    subtotal += productTotal;
+  });
+
+
+  // Calcular costo de envío
+  const shippingCost = subtotal * updateShippingCost();
+
+
+  // Calcular total
+  const total = subtotal + shippingCost;
+
+
+  // Mostrar en TAB3
+  document.getElementById("subtotalTab").innerText = `Subtotal: UYU ${subtotal.toFixed(2)}`;
+  document.getElementById("shippingTab").innerText = `Costo de envío: UYU ${shippingCost.toFixed(2)}`;
+  document.getElementById("totalTab").innerText = `Total: UYU ${total.toFixed(2)}`;
+}
+
+
+// Agregar escucha para recalcular cuando se cambia el método de envío
+document.querySelectorAll('input[name="radio-stacked"]').forEach((input) => {
+  input.addEventListener('change', calculateTotals);
+});
 
 
     });
+
+
+
+
+
+
 
 
       // Manejo inicial de campos en función del método de pago seleccionado
@@ -287,6 +447,12 @@ function displayCartProduct() {
   let radio2 = document.getElementById("validationFormCheck5");
   let tarjetaInputs = document.querySelectorAll("#exampleInput5, #exampleInput6, #exampleInput7");
   let cuentaInput = document.getElementById("exampleInput8");
+
+
+
+
+
+
 
 
   function toggleFields() {
@@ -304,13 +470,31 @@ function displayCartProduct() {
   }
 
 
+
+
+
+
+
+
   // Escuchar cambios en los radios
   radio1.addEventListener("change", toggleFields);
   radio2.addEventListener("change", toggleFields);
 
 
+
+
+
+
+
+
   // Inicializar estado al cargar la página
   toggleFields();
+
+
+
+
+
+
 
 
     // Agregar el total general al final del carrito
@@ -321,9 +505,21 @@ function displayCartProduct() {
         `;
 
 
+
+
+
+
+
+
     // Calcular y mostrar el total inicial
     updateTotal();
   }
+
+
+
+
+
+
 
 
     //Funcionalidad botón Finalizar compra
@@ -332,9 +528,21 @@ function displayCartProduct() {
   }
 
 
+
+
+
+
+
+
  
  
 }
+
+
+
+
+
+
 
 
 // Función para actualizar la cantidad de productos
@@ -342,6 +550,12 @@ function updateQuantity(index, change) {
   const currentUser = localStorage.getItem("currentUser");
   let cartProducts =
     JSON.parse(localStorage.getItem(`carrito_${currentUser}`)) || [];
+
+
+
+
+
+
 
 
   // Actualizar la cantidad del producto seleccionado
@@ -356,13 +570,31 @@ function updateQuantity(index, change) {
   }
 
 
+
+
+
+
+
+
   // Guardar los cambios en el localStorage
   localStorage.setItem(`carrito_${currentUser}`, JSON.stringify(cartProducts));
+
+
+
+
+
+
 
 
   // Actualizar la interfaz
   displayCartProduct(); // Volver a mostrar el carrito
 }
+
+
+
+
+
+
 
 
 // Función para calcular y mostrar el total de todos los productos
@@ -371,6 +603,12 @@ function updateTotal() {
   let cartProducts =
     JSON.parse(localStorage.getItem(`carrito_${currentUser}`)) || [];
   let total = 0;
+
+
+
+
+
+
 
 
   // Calcular el total sumando el subtotal de cada producto, multiplicando por 44 si es USD
@@ -383,6 +621,12 @@ function updateTotal() {
   });
 
 
+
+
+
+
+
+
   // Mostrar el total en el elemento correspondiente
   const totalElement = document.getElementById("total");
   if (totalElement && cartProducts.length > 0) {
@@ -391,11 +635,29 @@ function updateTotal() {
 }
 
 
+
+
+
+
+
+
 // Mostrar el producto en el carrito al cargar la página
 document.addEventListener("DOMContentLoaded", displayCartProduct);
 
 
+
+
+
+
+
+
 //Validar los campos y mostrar mensaje de compra exitosa
+
+
+
+
+
+
 
 
 function finalizarCompra() {
@@ -413,6 +675,12 @@ function finalizarCompra() {
   }
 
 
+
+
+
+
+
+
   // Se cumplen todas las validaciones
   const carritoUser = `carrito_${localStorage.getItem("currentUser")}`;
   Swal.fire({
@@ -426,4 +694,3 @@ function finalizarCompra() {
       location.reload();
   });
 }
-
